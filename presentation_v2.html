@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Межкультурные различия: Северная Америка vs СНГ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        /* === ETHERFUSE-INSPIRED DARK COLOR PALETTE === */
+        :root {
+            --neon-lime: #D4FF00;
+            --neon-lime-dim: #a8cc00;
+            --dark-bg: #0a0a0a;
+            --dark-card: #1a1a1a;
+            --dark-gray: #2a2a2a;
+            --grid-color: rgba(80, 80, 80, 0.3);
+            --white: #ffffff;
+            --text-gray: #888888;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: var(--dark-bg);
+            color: var(--white);
+            overflow: hidden;
+        }
+
+        .pixel-font {
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        .slide {
+            display: none;
+            width: 100vw;
+            height: 100vh;
+            padding: 40px 60px;
+            position: relative;
+            background: var(--dark-bg);
+            /* Grid background */
+            background-image: 
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Pixel border effect - dark theme */
+        .pixel-border {
+            border: 4px solid var(--neon-lime);
+            box-shadow: 
+                0 0 20px rgba(212, 255, 0, 0.3),
+                8px 8px 0 var(--dark-gray);
+            background: var(--dark-card);
+            padding: 25px;
+            color: var(--white);
+        }
+
+        /* Pixel shape decorations */
+        .pixel-shape {
+            position: absolute;
+            background: var(--neon-lime);
+            clip-path: polygon(
+                0% 20%, 20% 20%, 20% 0%, 80% 0%, 80% 20%, 100% 20%,
+                100% 80%, 80% 80%, 80% 100%, 20% 100%, 20% 80%, 0% 80%
+            );
+        }
+
+        .pixel-shape.dark {
+            background: var(--dark-gray);
+            border: 2px solid var(--dark-card);
+        }
+
+        /* Title styles */
+        h1 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 44px;
+            text-align: center;
+            color: var(--neon-lime);
+            text-shadow: 0 0 10px rgba(212, 255, 0, 0.2);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        h2 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 22px;
+            color: var(--neon-lime);
+            margin-bottom: 30px;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        h3 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 14px;
+            color: var(--white);
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        /* VS screen for slide 1 */
+        .vs-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            margin: 40px 0;
+        }
+
+        .character {
+            text-align: center;
+            padding: 30px;
+            background: var(--dark-card);
+            border: 4px solid var(--neon-lime);
+            box-shadow: 0 0 30px rgba(212, 255, 0, 0.2);
+            position: relative;
+            min-width: 280px;
+        }
+
+        .character::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: var(--neon-lime);
+            opacity: 0.05;
+            z-index: -1;
+        }
+
+        .character-icon {
+            font-size: 80px;
+            margin-bottom: 15px;
+            animation: bounce 1s infinite alternate;
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
+        }
+
+        .vs-text {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 48px;
+            color: var(--neon-lime);
+            text-shadow: 0 0 40px rgba(212, 255, 0, 0.8);
+            animation: pulse 0.5s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from { transform: scale(1); opacity: 1; }
+            to { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        /* Stat bars */
+        .stat-bar {
+            background: var(--dark-gray);
+            border: 3px solid var(--neon-lime);
+            height: 24px;
+            width: 200px;
+            margin: 5px 0;
+            position: relative;
+            box-shadow: 0 0 10px rgba(212, 255, 0, 0.2);
+        }
+
+        .stat-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--neon-lime), var(--neon-lime-dim));
+            box-shadow: 0 0 15px rgba(212, 255, 0, 0.5);
+        }
+
+        .stat-label {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 10px;
+            margin-bottom: 5px;
+            color: var(--neon-lime);
+        }
+
+        /* Table styles */
+        table {
+            border-collapse: separate;
+            border-spacing: 4px;
+            width: 100%;
+            max-width: 900px;
+            margin: 20px auto;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            background: var(--dark-card);
+            border: 2px solid var(--dark-gray);
+            font-size: 14px;
+            color: var(--white);
+        }
+
+        th {
+            background: var(--neon-lime);
+            font-family: 'Press Start 2P', cursive;
+            font-size: 11px;
+            color: var(--dark-bg);
+            border-color: var(--neon-lime);
+        }
+
+        td strong {
+            color: var(--neon-lime);
+        }
+
+        /* Google Translate style */
+        .translate-container {
+            display: flex;
+            gap: 20px;
+            align-items: stretch;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .translate-box {
+            flex: 1;
+            background: var(--dark-card);
+            color: var(--white);
+            padding: 20px;
+            border: 3px solid var(--dark-gray);
+        }
+
+        .translate-box.left {
+            border-color: var(--neon-lime);
+            box-shadow: 0 0 20px rgba(212, 255, 0, 0.15);
+        }
+
+        .translate-box.right {
+            border-color: var(--dark-gray);
+            background: var(--dark-gray);
+        }
+
+        .translate-header {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 12px;
+            padding: 10px;
+            margin: -20px -20px 15px -20px;
+            text-align: center;
+        }
+
+        .translate-box.left .translate-header {
+            background: var(--neon-lime);
+            color: var(--dark-bg);
+        }
+
+        .translate-box.right .translate-header {
+            background: var(--dark-gray);
+            color: var(--white);
+            border-bottom: 2px solid var(--dark-card);
+        }
+
+        .translate-arrow {
+            font-size: 40px;
+            color: var(--neon-lime);
+            display: flex;
+            align-items: center;
+            animation: arrowMove 1s infinite alternate;
+            text-shadow: 0 0 20px rgba(212, 255, 0, 0.5);
+        }
+
+        @keyframes arrowMove {
+            from { transform: translateX(-5px); }
+            to { transform: translateX(5px); }
+        }
+
+        /* Meme slide */
+        .meme-container {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .meme-face {
+            font-size: 120px;
+            margin: 20px 0;
+        }
+
+        .health-bar {
+            width: 300px;
+            height: 30px;
+            background: var(--dark-gray);
+            border: 3px solid var(--neon-lime);
+            margin: 20px auto;
+            position: relative;
+            box-shadow: 0 0 15px rgba(212, 255, 0, 0.2);
+        }
+
+        .health-fill {
+            height: 100%;
+            width: 15%;
+            background: linear-gradient(90deg, #ff4444, #ff6666);
+            animation: blink 0.5s infinite;
+            box-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
+        }
+
+        @keyframes blink {
+            50% { opacity: 0.5; }
+        }
+
+        .health-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Press Start 2P', cursive;
+            font-size: 10px;
+            color: var(--white);
+        }
+
+        /* Quiz style */
+        .quiz-option {
+            display: block;
+            background: var(--dark-card);
+            border: 3px solid var(--dark-gray);
+            padding: 15px 30px;
+            margin: 10px 0;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+            color: var(--white);
+        }
+
+        .quiz-option:hover {
+            background: var(--dark-gray);
+            border-color: var(--neon-lime);
+            box-shadow: 0 0 20px rgba(212, 255, 0, 0.3);
+            transform: translateX(5px);
+        }
+
+        .quiz-option.correct {
+            background: #22c55e;
+            color: var(--white);
+            border-color: #22c55e;
+            box-shadow: 0 0 30px rgba(34, 197, 94, 0.5);
+        }
+
+        .quiz-option.wrong {
+            animation: wrongAnswer 0.6s ease;
+        }
+
+        @keyframes wrongAnswer {
+            0%, 100% { background: var(--dark-card); border-color: var(--dark-gray); }
+            25% { background: #ef4444; border-color: #ef4444; }
+            50% { background: var(--dark-card); border-color: var(--dark-gray); }
+            75% { background: #ef4444; border-color: #ef4444; }
+        }
+
+        /* Tips list */
+        .tips-list {
+            list-style: none;
+            max-width: 800px;
+        }
+
+        .tips-list li {
+            background: var(--dark-card);
+            border: 3px solid var(--dark-gray);
+            border-left: 6px solid var(--neon-lime);
+            padding: 15px 20px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--white);
+        }
+
+        .tips-list li:hover {
+            border-color: var(--neon-lime);
+            box-shadow: 0 0 20px rgba(212, 255, 0, 0.2);
+        }
+
+        .tip-icon {
+            font-size: 24px;
+        }
+
+        /* Comparison slide */
+        .comparison-container {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        .location {
+            text-align: center;
+            background: var(--dark-card);
+            padding: 20px;
+            border: 3px solid var(--dark-gray);
+        }
+
+        .location-image {
+            font-size: 80px;
+            margin-bottom: 15px;
+        }
+
+        .location-label {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 12px;
+            color: var(--neon-lime);
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 12px;
+            padding: 15px 30px;
+            background: var(--neon-lime);
+            color: var(--dark-bg);
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover {
+            background: var(--white);
+            box-shadow: 0 0 30px rgba(212, 255, 0, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:active {
+            transform: translateY(0);
+        }
+
+        .nav-btn.start-btn {
+            padding: 20px 60px;
+            font-size: 16px;
+        }
+
+        #startNav {
+            display: flex;
+        }
+
+        #mainNav {
+            display: none;
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 14px;
+            color: var(--neon-lime);
+            background: var(--dark-card);
+            padding: 10px 15px;
+            border: 2px solid var(--neon-lime);
+        }
+
+        /* Contact links */
+        .contacts {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .contact-link {
+            display: inline-block;
+            margin: 10px 20px;
+            padding: 10px 20px;
+            background: transparent;
+            color: var(--neon-lime);
+            text-decoration: none;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 10px;
+            border: 3px solid var(--neon-lime);
+            transition: all 0.2s;
+        }
+
+        .contact-link:hover {
+            background: var(--neon-lime);
+            color: var(--dark-bg);
+            box-shadow: 0 0 30px rgba(212, 255, 0, 0.4);
+        }
+
+        /* Achievement badges */
+        .badges {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .badge {
+            text-align: center;
+            padding: 20px;
+            background: var(--dark-card);
+            border: 3px solid var(--neon-lime);
+            box-shadow: 0 0 20px rgba(212, 255, 0, 0.2);
+        }
+
+        .badge-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .badge-name {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 8px;
+            color: var(--neon-lime);
+        }
+
+        /* Example block */
+        .example-block {
+            background: var(--dark-card);
+            color: var(--white);
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 6px solid var(--neon-lime);
+        }
+
+        .example-label {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 10px;
+            color: var(--neon-lime);
+            margin-bottom: 10px;
+        }
+
+        /* Scrollable content */
+        .scroll-content {
+            max-height: 70vh;
+            overflow-y: auto;
+            padding-right: 20px;
+        }
+
+        .scroll-content::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .scroll-content::-webkit-scrollbar-track {
+            background: var(--dark-gray);
+        }
+
+        .scroll-content::-webkit-scrollbar-thumb {
+            background: var(--neon-lime);
+        }
+
+        /* Fruit icons */
+        .fruit-compare {
+            display: flex;
+            gap: 60px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .fruit {
+            text-align: center;
+            background: var(--dark-card);
+            padding: 20px;
+            border: 3px solid var(--dark-gray);
+        }
+
+        .fruit:first-child {
+            border-color: var(--neon-lime);
+            box-shadow: 0 0 25px rgba(212, 255, 0, 0.2);
+        }
+
+        .fruit-icon {
+            font-size: 80px;
+            margin-bottom: 15px;
+        }
+
+        .fruit-desc {
+            font-size: 12px;
+            max-width: 200px;
+            color: var(--text-gray);
+        }
+
+        /* Pixel decorations for corners */
+        .pixel-decoration {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: var(--neon-lime);
+            opacity: 0.3;
+        }
+
+        .pixel-decoration.top-left {
+            top: 20px;
+            left: 20px;
+            clip-path: polygon(0 0, 100% 0, 100% 50%, 50% 50%, 50% 100%, 0 100%);
+        }
+
+        .pixel-decoration.top-right {
+            top: 20px;
+            right: 20px;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 100%, 50% 50%, 0 50%);
+        }
+
+        .pixel-decoration.bottom-left {
+            bottom: 80px;
+            left: 20px;
+            clip-path: polygon(0 0, 50% 0, 50% 50%, 100% 50%, 100% 100%, 0 100%);
+        }
+
+        .pixel-decoration.bottom-right {
+            bottom: 80px;
+            right: 20px;
+            clip-path: polygon(50% 0, 100% 0, 100% 100%, 0 100%, 0 50%, 50% 50%);
+        }
+
+        /* Double arrow indicator */
+        .arrow-indicator {
+            font-family: 'Press Start 2P', cursive;
+            color: var(--neon-lime);
+            font-size: 16px;
+            opacity: 0.6;
+            animation: arrowPulse 1.5s infinite;
+        }
+
+        @keyframes arrowPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Highlight text */
+        .highlight {
+            color: var(--neon-lime);
+            text-shadow: 0 0 10px rgba(212, 255, 0, 0.3);
+        }
+
+        /* Navigation menu */
+        .menu-toggle {
+            position: fixed;
+            top: 20px;
+            left: 30px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 10px;
+            padding: 10px 15px;
+            background: var(--dark-card);
+            color: var(--neon-lime);
+            border: 2px solid var(--neon-lime);
+            cursor: pointer;
+            z-index: 200;
+            transition: all 0.2s;
+        }
+
+        .menu-toggle:hover {
+            background: var(--neon-lime);
+            color: var(--dark-bg);
+        }
+
+        .nav-menu {
+            position: fixed;
+            top: 60px;
+            left: 30px;
+            background: var(--dark-card);
+            border: 2px solid var(--neon-lime);
+            padding: 15px;
+            z-index: 200;
+            display: none;
+            min-width: 200px;
+        }
+
+        .nav-menu.open {
+            display: block;
+        }
+
+        .nav-menu-item {
+            display: block;
+            padding: 10px 15px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 9px;
+            color: var(--white);
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+        }
+
+        .nav-menu-item:hover {
+            background: var(--neon-lime);
+            color: var(--dark-bg);
+        }
+
+        /* Translate button and hidden translation */
+        .translate-btn {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 14px;
+            padding: 15px 40px;
+            background: var(--neon-lime);
+            color: var(--dark-bg);
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin: 20px 0;
+        }
+
+        .translate-btn:hover:not(.disabled) {
+            background: var(--white);
+            box-shadow: 0 0 30px rgba(212, 255, 0, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .translate-btn.disabled {
+            background: var(--dark-gray);
+            color: var(--text-gray);
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .translation-hidden {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+            pointer-events: none;
+        }
+
+        .translation-visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .translate-slide-container {
+            display: flex;
+            gap: 40px;
+            align-items: stretch;
+            justify-content: center;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .translate-side {
+            flex: 1;
+            background: var(--dark-card);
+            padding: 30px;
+            border: 3px solid var(--dark-gray);
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .translate-side.left {
+            border-color: var(--dark-gray);
+        }
+
+        .translate-side.right {
+            border-color: var(--neon-lime);
+            box-shadow: 0 0 20px rgba(212, 255, 0, 0.15);
+        }
+
+        .translate-side-header {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 14px;
+            padding: 12px;
+            margin: -30px -30px 20px -30px;
+            text-align: center;
+        }
+
+        .translate-side.left .translate-side-header {
+            background: var(--dark-gray);
+            color: var(--white);
+        }
+
+        .translate-side.right .translate-side-header {
+            background: var(--neon-lime);
+            color: var(--dark-bg);
+        }
+
+        .translate-side p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+
+        .translate-meaning {
+            color: var(--text-gray);
+            font-size: 14px !important;
+            margin-top: 20px !important;
+            font-style: italic;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 18px; }
+            h2 { font-size: 12px; }
+            .slide { padding: 20px; }
+            .translate-container { flex-direction: column; }
+            table { font-size: 12px; }
+            th, td { padding: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-counter">
+        <span id="currentSlide">1</span> / <span id="totalSlides">21</span>
+    </div>
+
+    <!-- Menu button and navigation -->
+    <button class="menu-toggle" onclick="toggleMenu()">☰ MENU</button>
+    <div class="nav-menu" id="navMenu">
+        <button class="nav-menu-item" onclick="goToSlide(1); toggleMenu();">🏠 Титульный</button>
+        <button class="nav-menu-item" onclick="goToSlide(4); toggleMenu();">📢 Communication</button>
+        <button class="nav-menu-item" onclick="goToSlide(10); toggleMenu();">📝 Feedback</button>
+        <button class="nav-menu-item" onclick="goToSlide(15); toggleMenu();">🤝 Trust</button>
+        <button class="nav-menu-item" onclick="goToSlide(21); toggleMenu();">📱 Контакты</button>
+    </div>
+
+    <!-- Slide 1: Title -->
+    <div class="slide active" id="slide1">
+        <div class="pixel-decoration top-left"></div>
+        <div class="pixel-decoration top-right"></div>
+        <div class="pixel-decoration bottom-left"></div>
+        <div class="pixel-decoration bottom-right"></div>
+        
+        <h1>Межкультурные различия</h1>
+        <div class="vs-container">
+            <div class="character">
+                <div class="character-icon">🗽😁</div>
+                <div class="pixel-font highlight">Северная Америка</div>
+                <div class="arrow-indicator" style="margin-top: 15px;">>></div>
+            </div>
+            <div class="vs-text">VS</div>
+            <div class="character">
+                <div class="character-icon">🪆😐</div>
+                <div class="pixel-font highlight">СНГ</div>
+                <div class="arrow-indicator" style="margin-top: 15px;">>></div>
+            </div>
+        </div>
+        <h2>Communication Style | Giving Feedback | Trust</h2>
+    </div>
+
+    <!-- Slide 2: About Expert -->
+    <div class="slide" id="slide2">
+        <div class="pixel-decoration top-left"></div>
+        <div class="pixel-decoration top-right"></div>
+        
+        <h2>Познакомимся?</h2>
+        <div class="pixel-border" style="width: calc(100% - 120px); max-width: 1100px; display: flex; gap: 40px; align-items: flex-start; padding: 30px;">
+            <!-- Photo -->
+            <div style="flex-shrink: 0;">
+                <img src="expert.png" alt="Дарья Туча" style="width: 280px; height: 280px; object-fit: cover; object-position: center top; border: 4px solid var(--neon-lime); box-shadow: 0 0 30px rgba(212, 255, 0, 0.3); border-radius: 8px;">
+                <h1 style="font-size: 20px; margin-top: 20px; text-align: center;">Дарья Туча</h1>
+            </div>
+            
+            <!-- Content -->
+            <div style="flex: 1;">
+                <!-- Skills -->
+                <div style="margin-bottom: 20px;">
+                    <div class="stat-label">INSTRUCTIONAL DESIGN SKILL</div>
+                    <div class="stat-bar" style="width: 100%;"><div class="stat-fill" style="width: 90%;"></div></div>
+                    
+                    <div class="stat-label">ENTERPENEUR MINDSET</div>
+                    <div class="stat-bar" style="width: 100%;"><div class="stat-fill" style="width: 85%;"></div></div>
+                    
+                    <div class="stat-label">AI ADOPTION</div>
+                    <div class="stat-bar" style="width: 100%;"><div class="stat-fill" style="width: 80%;"></div></div>
+                </div>
+
+                <!-- Company logos -->
+                <div style="margin: 20px 0; background: rgba(255, 255, 255, 0.95); padding: 12px 20px; border-radius: 8px; display: inline-block;">
+                    <img src="alllogo.png" alt="Company logos" style="height: 35px; display: block;">
+                </div>
+
+                <!-- Info list -->
+                <ul style="list-style: none; margin: 15px 0; font-size: 14px;">
+                    <li style="margin: 8px 0;">🇨🇦 Senior Learning Designer в Канадской компании</li>
+                    <li style="margin: 8px 0;">🔥 ex-Expedia, ex-Lululemon, ex-Skyeng</li>
+                    <li style="margin: 8px 0;">🤍 Co-founder LXD hero</li>
+                    <li style="margin: 8px 0;">🎤 Автор канала Туча EdTech</li>
+                </ul>
+
+                <!-- Contact links -->
+                <div class="contacts" style="margin-top: 15px; text-align: left;">
+                    <a href="https://www.linkedin.com/in/daria-tucha" class="contact-link" target="_blank">LinkedIn</a>
+                    <a href="https://t.me/edtechtucha" class="contact-link" target="_blank">Telegram канал</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Intro Meme -->
+    <div class="slide" id="slide3">
+        <div class="meme-container">
+            <h2>🎮 Знакомо?</h2>
+            <p class="pixel-font highlight" style="font-size: 14px; margin: 20px 0;">
+                "Моё лицо, когда меня 15-й раз за день<br>спросили, как же мои дела?"
+            </p>
+            <img src="slavic-face.jpg" alt="Slavic Face Meme" style="max-width: 400px; max-height: 300px; border: 4px solid var(--neon-lime); box-shadow: 0 0 30px rgba(212, 255, 0, 0.3); margin: 20px 0;">
+            
+            <div class="health-bar">
+                <div class="health-fill"></div>
+                <div class="health-label">PATIENCE: LOW</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Communication Differences -->
+    <div class="slide" id="slide4">
+        <h2>📢 Communication Style</h2>
+        <h3>Low-context vs High-context</h3>
+        
+        <table style="font-size: 18px;">
+            <tr>
+                <th></th>
+                <th>🇺🇸 North America</th>
+                <th>🇷🇺 СНГ / Россия</th>
+            </tr>
+            <tr>
+                <td><strong>Контекст</strong></td>
+                <td>Low-context — всё проговаривается словами</td>
+                <td>Medium/High-context — нужно "читать между строк"</td>
+            </tr>
+            <tr>
+                <td><strong>Улыбка</strong></td>
+                <td>"Социальная смазка", норма вежливости 😊</td>
+                <td>Искреннее чувство, не для незнакомцев 😐</td>
+            </tr>
+            <tr>
+                <td><strong>Small talk</strong></td>
+                <td>Обязателен ("How are you?")</td>
+                <td>Странно и неуместно с незнакомыми</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Slide 5: Google Translate - Example 1 -->
+    <div class="slide" id="slide5">
+        <h2>🔄 Google Translate</h2>
+        <p class="pixel-font highlight" style="font-size: 12px; margin-bottom: 30px;">Пример 1: Lunch invitation</p>
+        
+        <div class="translate-slide-container">
+            <div class="translate-side left">
+                <div class="translate-side-header">RU 🇷🇺</div>
+                <p><strong>Q:</strong> "Ты хочешь кушать?"</p>
+                <p><strong>A:</strong> "Да нет."</p>
+                <p class="translate-meaning">Meaning: На самом деле, я хочу кушать</p>
+            </div>
+            <div class="translate-side right translation-hidden" id="trans5">
+                <div class="translate-side-header">EN 🇺🇸</div>
+                <p><strong>Q:</strong> "Do you want to grab some lunch?"</p>
+                <p><strong>A:</strong> "No, thank you."</p>
+                <p class="translate-meaning">Meaning: I don't want to eat</p>
+            </div>
+        </div>
+        
+        <button class="translate-btn" onclick="document.getElementById('trans5').classList.add('translation-visible'); this.classList.add('disabled'); this.onclick=null;">ПЕРЕВЕСТИ →</button>
+    </div>
+
+    <!-- Slide 6: Google Translate - Example 2 -->
+    <div class="slide" id="slide6">
+        <h2>🔄 Google Translate</h2>
+        <p class="pixel-font highlight" style="font-size: 12px; margin-bottom: 30px;">Пример 2: Meeting agenda</p>
+        
+        <div class="translate-slide-container">
+            <div class="translate-side left">
+                <div class="translate-side-header">RU 🇷🇺</div>
+                <p><strong>Subject:</strong> Встреча</p>
+                <p><strong>Agenda:</strong></p>
+                <p>1. Обсудить дела</p>
+            </div>
+            <div class="translate-side right translation-hidden" id="trans6">
+                <div class="translate-side-header">EN 🇺🇸</div>
+                <p><strong>Subject:</strong> Q3 Planning Session</p>
+                <p><strong>Agenda:</strong></p>
+                <p>1. Review Q2 results (15 min)</p>
+                <p>2. Discuss Q3 priorities (20 min)</p>
+                <p>3. Assign action items (10 min)</p>
+                <p>4. Q&A (5 min)</p>
+                <p><strong>Pre-read:</strong> Q2 Report attached</p>
+            </div>
+        </div>
+        
+        <button class="translate-btn" onclick="document.getElementById('trans6').classList.add('translation-visible'); this.classList.add('disabled'); this.onclick=null;">ПЕРЕВЕСТИ →</button>
+    </div>
+
+    <!-- Slide 7: Google Translate - Example 3 -->
+    <div class="slide" id="slide7">
+        <h2>🔄 Google Translate</h2>
+        <p class="pixel-font highlight" style="font-size: 12px; margin-bottom: 30px;">Пример 3: How are you?</p>
+        
+        <div class="translate-slide-container">
+            <div class="translate-side left">
+                <div class="translate-side-header">RU 🇷🇺</div>
+                <p>"..." <em>(awkward silence)</em></p>
+                <p class="translate-meaning">Thinking: "Зачем он спрашивает? Мы же не друзья..."</p>
+            </div>
+            <div class="translate-side right translation-hidden" id="trans7">
+                <div class="translate-side-header">EN 🇺🇸</div>
+                <p>"How are you?"</p>
+                <p class="translate-meaning">Meaning: Hi! (не ждут ответа)</p>
+            </div>
+        </div>
+        
+        <button class="translate-btn" onclick="document.getElementById('trans7').classList.add('translation-visible'); this.classList.add('disabled'); this.onclick=null;">ПЕРЕВЕСТИ →</button>
+    </div>
+
+    <!-- Slide 8: Quiz -->
+    <div class="slide" id="slide8">
+        <div class="pixel-border" style="max-width: 600px; text-align: center;">
+            <p class="pixel-font highlight" style="font-size: 14px; margin-bottom: 30px;">
+                Какая ситуация самая сложная для коммуникации?
+            </p>
+
+            <div class="quiz-option" onclick="this.classList.remove('correct'); this.classList.add('wrong'); setTimeout(() => this.classList.remove('wrong'), 600);">
+                1) Low-context + Low-context
+            </div>
+            <div class="quiz-option" onclick="this.classList.remove('correct'); this.classList.add('wrong'); setTimeout(() => this.classList.remove('wrong'), 600);">
+                2) Low-context + High-context
+            </div>
+            <div class="quiz-option" onclick="this.classList.add('correct');">
+                3) High-context + High-context
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 9: Communication Tips -->
+    <div class="slide" id="slide9">
+        <h2>💡 И что делать?</h2>
+        
+        <ul class="tips-list">
+            <li>
+                <span class="tip-icon">💬</span>
+                <span>Если в команде есть high-context и low-context люди — используйте <strong class="highlight">low-context подход</strong>: проговаривайте всё явно</span>
+            </li>
+            <li>
+                <span class="tip-icon">😊</span>
+                <span>Не поверите, но улыбаться и вести small talk — это приходит со временем, <strong class="highlight">привычка вырабатывается</strong></span>
+            </li>
+            <li>
+                <span class="tip-icon">✅</span>
+                <span>Помните: американское "How are you?" = не вопрос, а приветствие<br>(можно просто ответить <strong class="highlight">"Good, thanks!"</strong>)</span>
+            </li>
+        </ul>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <div class="stat-label">COMMUNICATION SKILL</div>
+            <div class="stat-bar" style="width: 300px; margin: 0 auto;">
+                <div class="stat-fill" style="width: 100%;"></div>
+            </div>
+            <p class="pixel-font highlight" style="font-size: 10px; margin-top: 10px;">+1 LEVEL UP!</p>
+        </div>
+    </div>
+
+    <!-- Slide 10: Feedback Differences -->
+    <div class="slide" id="slide10">
+        <h2>📝 Giving Feedback</h2>
+        <h3>Indirect vs Direct Feedback</h3>
+        
+        <table>
+            <tr>
+                <th></th>
+                <th>🇺🇸 North America</th>
+                <th>🇷🇺 СНГ / Россия</th>
+            </tr>
+            <tr>
+                <td><strong>Структура</strong></td>
+                <td>То, что нужно сделать по-другому, закодировано в позитивный фидбэк 🥪</td>
+                <td>Фидбэк прямой, сразу к делу ⚡</td>
+            </tr>
+            <tr>
+                <td><strong>Язык</strong></td>
+                <td>Softeners: "maybe", "a bit", "kind of", "sort of"</td>
+                <td>"Это не работает", "Переделай"</td>
+            </tr>
+            <tr>
+                <td><strong>Публичная критика</strong></td>
+                <td>Табу, только 1-on-1 🤫</td>
+                <td>Нормально, при всех 📢</td>
+            </tr>
+            <tr>
+                <td><strong>Позитивный фидбэк</strong></td>
+                <td>Много и часто 🌟🌟🌟</td>
+                <td>Редко (если всё ок — зачем говорить?) 🤷</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Slide 11: Google Translate Feedback - Example 1 -->
+    <div class="slide" id="slide11">
+        <h2>🔄 Google Translate — Feedback</h2>
+        <p class="pixel-font highlight" style="font-size: 12px; margin-bottom: 30px;">Пример 1: Критика работы</p>
+        
+        <div class="translate-slide-container">
+            <div class="translate-side left">
+                <div class="translate-side-header">DIRECT 🇷🇺</div>
+                <p>"This isn't good enough. We can't present it tomorrow."</p>
+            </div>
+            <div class="translate-side right translation-hidden" id="trans11">
+                <div class="translate-side-header">DIPLOMATIC 🇺🇸</div>
+                <p>"John, I really appreciate all your work on this. I'm just a bit concerned it may not be ready for tomorrow."</p>
+            </div>
+        </div>
+        
+        <button class="translate-btn" onclick="document.getElementById('trans11').classList.add('translation-visible'); this.classList.add('disabled'); this.onclick=null;">ПЕРЕВЕСТИ →</button>
+    </div>
+
+    <!-- Slide 12: Google Translate Feedback - Example 2 -->
+    <div class="slide" id="slide12">
+        <h2>🔄 Google Translate — Feedback</h2>
+        <p class="pixel-font highlight" style="font-size: 12px; margin-bottom: 30px;">Пример 2: Отклонение идеи</p>
+        
+        <div class="translate-slide-container">
+            <div class="translate-side left">
+                <div class="translate-side-header">DIRECT 🇷🇺</div>
+                <p>"No, I don't like it. It's not right for this."</p>
+            </div>
+            <div class="translate-side right translation-hidden" id="trans12">
+                <div class="translate-side-header">DIPLOMATIC 🇺🇸</div>
+                <p>"Well, it could have legs, but perhaps we should discuss it further next week."</p>
+            </div>
+        </div>
+        
+        <button class="translate-btn" onclick="document.getElementById('trans12').classList.add('translation-visible'); this.classList.add('disabled'); this.onclick=null;">ПЕРЕВЕСТИ →</button>
+    </div>
+
+    <!-- Slide 13: Google Translate Feedback - Example 3 -->
+    <div class="slide" id="slide13">
+        <h2>🔄 Google Translate — Feedback</h2>
+        <p class="pixel-font highlight" style="font-size: 12px; margin-bottom: 30px;">Пример 3: Время на встрече</p>
+        
+        <div class="translate-slide-container">
+            <div class="translate-side left">
+                <div class="translate-side-header">DIRECT 🇷🇺</div>
+                <p>"This is taking too long. We need to move on."</p>
+            </div>
+            <div class="translate-side right translation-hidden" id="trans13">
+                <div class="translate-side-header">DIPLOMATIC 🇺🇸</div>
+                <p>"Sorry, I'm really conscious of time. Perhaps we should move on."</p>
+            </div>
+        </div>
+        
+        <button class="translate-btn" onclick="document.getElementById('trans13').classList.add('translation-visible'); this.classList.add('disabled'); this.onclick=null;">ПЕРЕВЕСТИ →</button>
+    </div>
+
+    <!-- Slide 14: Feedback Tips -->
+    <div class="slide" id="slide14">
+        <h2>💡 Что слышит другая сторона?</h2>
+        
+        <!-- Two comparison boxes -->
+        <div style="display: flex; gap: 30px; max-width: 900px; margin-bottom: 30px;">
+            <div class="pixel-border" style="flex: 1; text-align: center;">
+                <p class="pixel-font" style="font-size: 12px; color: var(--neon-lime); margin-bottom: 15px;">🇷🇺 СНГ слышит US фидбэк</p>
+                <p style="font-size: 16px;">"Значит всё ок!"</p>
+                <p style="font-size: 14px; color: var(--text-gray); margin-top: 10px;">→ ничего не меняет</p>
+            </div>
+            <div class="pixel-border" style="flex: 1; text-align: center;">
+                <p class="pixel-font" style="font-size: 12px; color: var(--neon-lime); margin-bottom: 15px;">🇺🇸 US слышит СНГ фидбэк</p>
+                <p style="font-size: 16px;">"Меня атакуют!"</p>
+                <p style="font-size: 14px; color: var(--text-gray); margin-top: 10px;">→ демотивация</p>
+            </div>
+        </div>
+
+        <!-- Tips -->
+        <ul class="tips-list" style="max-width: 900px;">
+            <li>
+                <span class="tip-icon">🤖</span>
+                <span>Работая с американцами — добавляйте softeners, просите <strong class="highlight">AI перевести на уважительный английский</strong></span>
+            </li>
+            <li>
+                <span class="tip-icon">💬</span>
+                <span>Объясните коллегам разницу в подходах, чтобы они поняли вас</span>
+            </li>
+            <li>
+                <span class="tip-icon">❓</span>
+                <span>Если сомневаетесь — спросите:<br><strong class="highlight">"I want to make sure I understood the feedback correctly. What exactly needs to be changed?"</strong></span>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Slide 15: Trust Differences -->
+    <div class="slide" id="slide15">
+        <h2>🤝 Trust</h2>
+        <h3>Peach vs Coconut Culture</h3>
+
+        <div class="fruit-compare">
+            <div class="fruit">
+                <div class="fruit-icon">🍑</div>
+                <div class="pixel-font highlight" style="font-size: 12px;">PEACH</div>
+                <p class="fruit-desc">Мягкая снаружи, косточка внутри</p>
+            </div>
+            <div class="fruit">
+                <div class="fruit-icon">🥥</div>
+                <div class="pixel-font" style="font-size: 12px; color: var(--white);">COCONUT</div>
+                <p class="fruit-desc">Твёрдая скорлупа, мягкий внутри</p>
+            </div>
+        </div>
+        
+        <table style="margin-top: 20px;">
+            <tr>
+                <th></th>
+                <th>🍑 North America</th>
+                <th>🥥 СНГ / Россия</th>
+            </tr>
+            <tr>
+                <td><strong>Оболочка</strong></td>
+                <td>Мягкая снаружи — сразу дружелюбны</td>
+                <td>Твёрдая снаружи — сначала сдержанны</td>
+            </tr>
+            <tr>
+                <td><strong>Основа доверия</strong></td>
+                <td>Task-based: компетенция и результаты</td>
+                <td>Relationship-based: личные отношения и время</td>
+            </tr>
+            <tr>
+                <td><strong>Рабочие связи</strong></td>
+                <td>Нормально строить связи, но не быть супер-друзьями</td>
+                <td>Если уж узнаёте друг друга — вы друллеги 👯</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Slide 16: Google Translate Trust - Example 1 -->
+    <div class="slide" id="slide16">
+        <h2>🔄 Google Translate — Trust</h2>
+        <p class="pixel-font highlight" style="font-size: 12px; margin-bottom: 30px;">Пример 1: Dinner invitation</p>
+        
+        <div class="translate-slide-container">
+            <div class="translate-side left">
+                <div class="translate-side-header">RU 🇷🇺</div>
+                <p>"Отлично! Когда идём?"</p>
+                <p class="translate-meaning">→ звонит на следующий день</p>
+            </div>
+            <div class="translate-side right translation-hidden" id="trans16">
+                <div class="translate-side-header">EN 🇺🇸</div>
+                <p>"We should grab dinner sometime!"</p>
+                <p class="translate-meaning">Вежливая фраза, не обязательство</p>
+            </div>
+        </div>
+        
+        <button class="translate-btn" onclick="document.getElementById('trans16').classList.add('translation-visible'); this.classList.add('disabled'); this.onclick=null;">ПЕРЕВЕСТИ →</button>
+    </div>
+
+    <!-- Slide 17: Trust Tips -->
+    <div class="slide" id="slide17">
+        <h2>💡 И что делать?</h2>
+        
+        <ul class="tips-list">
+            <li>
+                <span class="tip-icon">📝</span>
+                <span>В начале встречи во время small talk <strong class="highlight">запоминайте личные детали</strong>, чтобы потом задавать персональные вопросы и устанавливать связи</span>
+            </li>
+            <li>
+                <span class="tip-icon">💡</span>
+                <span>Помните: <strong class="highlight">американская дружелюбность ≠ дружба</strong>,<br><strong style="color: #ff6666;">русская сдержанность ≠ враждебность</strong></span>
+            </li>
+        </ul>
+
+    </div>
+
+    <!-- Slide 18: Summary -->
+    <div class="slide" id="slide18">
+        <h2>📋 Что мы обсудили</h2>
+        
+        <table style="max-width: 700px; font-size: 18px;">
+            <tr>
+                <th>Элемент</th>
+                <th>Северная Америка</th>
+                <th>СНГ / Россия</th>
+            </tr>
+            <tr>
+                <td><strong>Коммуникация</strong></td>
+                <td>Explicit, low-context</td>
+                <td>Более implicit, context-aware</td>
+            </tr>
+            <tr>
+                <td><strong>Обратная связь</strong></td>
+                <td>Softened, sandwich</td>
+                <td>Прямая, без обёртки</td>
+            </tr>
+            <tr>
+                <td><strong>Доверие</strong></td>
+                <td>Task-based 🍑</td>
+                <td>Relationship-based 🥥</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Slide 19: Key Takeaways -->
+    <div class="slide" id="slide19">
+        <h2>🎯 Key Takeaways</h2>
+        
+        <div class="badges" style="gap: 40px;">
+            <div class="badge" style="padding: 30px; min-width: 200px;">
+                <div class="badge-icon" style="font-size: 50px;">🐟</div>
+                <div class="badge-name" style="font-size: 10px;">Fish Don't See Water</div>
+                <p style="font-size: 12px; color: var(--text-gray); margin-top: 10px;">Мы не замечаем свою культуру</p>
+            </div>
+            <div class="badge" style="padding: 30px; min-width: 200px;">
+                <div class="badge-icon" style="font-size: 50px;">❓</div>
+                <div class="badge-name" style="font-size: 10px;">Curious Mind</div>
+                <p style="font-size: 12px; color: var(--text-gray); margin-top: 10px;">Спрашивайте и уточняйте</p>
+            </div>
+            <div class="badge" style="padding: 30px; min-width: 200px;">
+                <div class="badge-icon" style="font-size: 50px;">🔄</div>
+                <div class="badge-name" style="font-size: 10px;">Adaptability</div>
+                <p style="font-size: 12px; color: var(--text-gray); margin-top: 10px;">Адаптируйте свой стиль</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 20: Final Meme -->
+    <div class="slide" id="slide20">
+        <h2 style="margin-bottom: 40px;">Когда в следующий раз спросят,<br>что у тебя с лицом — покажи это фото</h2>
+        <div style="display: flex; gap: 50px; align-items: flex-start; justify-content: center;">
+            <!-- Left: Slavic face -->
+            <img src="slavic-face.jpg" alt="Slavic Face" style="width: 400px; height: 350px; object-fit: cover; border: 4px solid var(--neon-lime); box-shadow: 0 0 20px rgba(212, 255, 0, 0.3); border-radius: 8px;">
+            
+            <!-- Right: Hidden spoiler / Comparison -->
+            <div style="position: relative;">
+                <div id="spoilerOverlay" onclick="this.style.display='none'; document.getElementById('comparisonImg').style.display='block';" style="width: 400px; height: 350px; background: var(--dark-gray); border: 4px solid var(--neon-lime); border-radius: 8px; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; transition: all 0.3s;">
+                    <p class="pixel-font" style="font-size: 14px; color: var(--neon-lime);">🔒 SPOILER</p>
+                    <p style="font-size: 14px; color: var(--text-gray); margin-top: 10px;">Нажми, чтобы открыть</p>
+                </div>
+                <img id="comparisonImg" src="comparison.jpg" alt="Comparison Meme" style="display: none; width: 400px; height: 350px; object-fit: cover; border: 4px solid var(--neon-lime); box-shadow: 0 0 30px rgba(212, 255, 0, 0.3); border-radius: 8px;">
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 21: Contact -->
+    <div class="slide" id="slide21">
+        <h2>🤝 Остаёмся на связи</h2>
+        
+        <div style="display: flex; gap: 40px; align-items: center; justify-content: center; margin: 40px 0;">
+            <img src="expert.png" alt="Дарья Туча" style="width: 250px; height: 250px; object-fit: cover; object-position: center top; border: 4px solid var(--neon-lime); box-shadow: 0 0 30px rgba(212, 255, 0, 0.3); border-radius: 8px;">
+            
+            <div style="text-align: center;">
+                <h1 style="font-size: 24px; margin-bottom: 30px;">Дарья Туча</h1>
+                <div class="contacts">
+                    <a href="https://www.linkedin.com/in/daria-tucha" class="contact-link" target="_blank">LinkedIn</a>
+                    <a href="https://t.me/edtechtucha" class="contact-link" target="_blank">Telegram</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav" id="mainNav">
+        <button class="nav-btn" id="prevBtn" onclick="prevSlide()">◀ PREV</button>
+        <button class="nav-btn" id="nextBtn" onclick="nextSlide()">NEXT ▶</button>
+    </div>
+    
+    <!-- Start button for slide 1 -->
+    <div class="nav" id="startNav">
+        <button class="nav-btn start-btn" onclick="nextSlide()">START ▶</button>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 21;
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            
+            if (n > totalSlides) currentSlide = 1;
+            if (n < 1) currentSlide = totalSlides;
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            document.getElementById('slide' + currentSlide).classList.add('active');
+            document.getElementById('currentSlide').textContent = currentSlide;
+            
+            // Toggle navigation buttons
+            if (currentSlide === 1) {
+                document.getElementById('startNav').style.display = 'flex';
+                document.getElementById('mainNav').style.display = 'none';
+            } else {
+                document.getElementById('startNav').style.display = 'none';
+                document.getElementById('mainNav').style.display = 'flex';
+            }
+        }
+
+        function nextSlide() {
+            currentSlide++;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide--;
+            showSlide(currentSlide);
+        }
+
+        function goToSlide(n) {
+            currentSlide = n;
+            showSlide(currentSlide);
+        }
+
+        function toggleMenu() {
+            document.getElementById('navMenu').classList.toggle('open');
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const menu = document.getElementById('navMenu');
+            const toggle = document.querySelector('.menu-toggle');
+            if (!menu.contains(e.target) && !toggle.contains(e.target)) {
+                menu.classList.remove('open');
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // Touch navigation for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX - touchEndX > 50) {
+                nextSlide();
+            } else if (touchEndX - touchStartX > 50) {
+                prevSlide();
+            }
+        });
+    </script>
+</body>
+</html>

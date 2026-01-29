@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Межкультурные различия: Северная Америка vs СНГ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        /* === TAMAGOTCHI-INSPIRED COLOR PALETTE === */
+        :root {
+            --pink: #FF1493;
+            --hot-pink: #FF69B4;
+            --cyan: #00BFFF;
+            --sky-blue: #87CEEB;
+            --yellow: #FFE135;
+            --lime: #32CD32;
+            --black: #1a1a1a;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: var(--pink);
+            color: var(--black);
+            overflow: hidden;
+        }
+
+        .pixel-font {
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        .slide {
+            display: none;
+            width: 100vw;
+            height: 100vh;
+            padding: 40px 60px;
+            position: relative;
+            background: var(--pink);
+        }
+
+        /* Alternating slide backgrounds */
+        .slide:nth-child(odd) {
+            background: var(--pink);
+        }
+
+        .slide:nth-child(even) {
+            background: var(--cyan);
+        }
+
+        .slide:nth-child(3n) {
+            background: var(--yellow);
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Pixel border effect */
+        .pixel-border {
+            border: 6px solid var(--black);
+            box-shadow: 
+                8px 8px 0 var(--black);
+            background: var(--white);
+            padding: 25px;
+            color: var(--black);
+        }
+
+        /* Title styles */
+        h1 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 28px;
+            text-align: center;
+            color: var(--white);
+            text-shadow: 4px 4px 0 var(--black), -2px -2px 0 var(--black), 2px -2px 0 var(--black), -2px 2px 0 var(--black);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        h2 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 18px;
+            color: var(--black);
+            text-shadow: 2px 2px 0 var(--white);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        h3 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 14px;
+            color: var(--black);
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 0 var(--white);
+        }
+
+        /* VS screen for slide 1 */
+        .vs-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            margin: 40px 0;
+        }
+
+        .character {
+            text-align: center;
+            padding: 30px;
+            background: var(--white);
+            border: 6px solid var(--black);
+            box-shadow: 8px 8px 0 var(--black);
+        }
+
+        .character-icon {
+            font-size: 80px;
+            margin-bottom: 15px;
+            animation: bounce 1s infinite alternate;
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
+        }
+
+        .vs-text {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 48px;
+            color: var(--yellow);
+            text-shadow: 4px 4px 0 var(--black), -2px -2px 0 var(--black);
+            animation: pulse 0.5s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+
+        /* Stat bars */
+        .stat-bar {
+            background: var(--white);
+            border: 4px solid var(--black);
+            height: 24px;
+            width: 200px;
+            margin: 5px 0;
+            position: relative;
+        }
+
+        .stat-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--lime), var(--cyan));
+        }
+
+        .stat-label {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 10px;
+            margin-bottom: 5px;
+            color: var(--black);
+        }
+
+        /* Table styles */
+        table {
+            border-collapse: separate;
+            border-spacing: 4px;
+            width: 100%;
+            max-width: 900px;
+            margin: 20px auto;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            background: var(--white);
+            border: 4px solid var(--black);
+            font-size: 14px;
+            color: var(--black);
+        }
+
+        th {
+            background: var(--black);
+            font-family: 'Press Start 2P', cursive;
+            font-size: 11px;
+            color: var(--white);
+        }
+
+        /* Google Translate style */
+        .translate-container {
+            display: flex;
+            gap: 20px;
+            align-items: stretch;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .translate-box {
+            flex: 1;
+            background: var(--white);
+            color: var(--black);
+            padding: 20px;
+            border: 6px solid var(--black);
+            box-shadow: 6px 6px 0 var(--black);
+        }
+
+        .translate-box.left {
+            border-color: var(--cyan);
+            border-width: 6px;
+            box-shadow: 6px 6px 0 var(--black);
+        }
+
+        .translate-box.right {
+            border-color: var(--pink);
+            border-width: 6px;
+            box-shadow: 6px 6px 0 var(--black);
+        }
+
+        .translate-header {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 12px;
+            padding: 10px;
+            margin: -20px -20px 15px -20px;
+            text-align: center;
+        }
+
+        .translate-box.left .translate-header {
+            background: var(--cyan);
+            color: var(--black);
+        }
+
+        .translate-box.right .translate-header {
+            background: var(--pink);
+            color: var(--white);
+        }
+
+        .translate-arrow {
+            font-size: 40px;
+            color: var(--black);
+            display: flex;
+            align-items: center;
+            animation: arrowMove 1s infinite alternate;
+            background: var(--yellow);
+            padding: 10px 15px;
+            border: 4px solid var(--black);
+        }
+
+        @keyframes arrowMove {
+            from { transform: translateX(-5px); }
+            to { transform: translateX(5px); }
+        }
+
+        /* Meme slide */
+        .meme-container {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .meme-face {
+            font-size: 120px;
+            margin: 20px 0;
+        }
+
+        .health-bar {
+            width: 300px;
+            height: 30px;
+            background: var(--white);
+            border: 4px solid var(--black);
+            margin: 20px auto;
+            position: relative;
+        }
+
+        .health-fill {
+            height: 100%;
+            width: 15%;
+            background: linear-gradient(90deg, var(--pink), var(--hot-pink));
+            animation: blink 0.5s infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0.5; }
+        }
+
+        .health-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Press Start 2P', cursive;
+            font-size: 10px;
+            color: var(--black);
+        }
+
+        /* Quiz style */
+        .quiz-option {
+            display: block;
+            background: var(--white);
+            border: 4px solid var(--black);
+            padding: 15px 30px;
+            margin: 10px 0;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+            color: var(--black);
+            box-shadow: 4px 4px 0 var(--black);
+        }
+
+        .quiz-option:hover {
+            background: var(--yellow);
+            color: var(--black);
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 var(--black);
+        }
+
+        .quiz-option.correct {
+            background: var(--lime);
+            border-color: var(--black);
+        }
+
+        /* Tips list */
+        .tips-list {
+            list-style: none;
+            max-width: 800px;
+        }
+
+        .tips-list li {
+            background: var(--white);
+            border: 4px solid var(--black);
+            padding: 15px 20px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--black);
+            box-shadow: 4px 4px 0 var(--black);
+        }
+
+        .tip-icon {
+            font-size: 24px;
+        }
+
+        /* Comparison slide */
+        .comparison-container {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        .location {
+            text-align: center;
+            background: var(--white);
+            padding: 20px;
+            border: 4px solid var(--black);
+            box-shadow: 6px 6px 0 var(--black);
+            padding: 20px;
+        }
+
+        .location-image {
+            font-size: 80px;
+            margin-bottom: 15px;
+        }
+
+        .location-label {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 12px;
+            color: var(--black);
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 12px;
+            padding: 15px 30px;
+            background: var(--black);
+            color: var(--white);
+            border: 4px solid var(--black);
+            cursor: pointer;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.3);
+            transition: all 0.1s;
+        }
+
+        .nav-btn:hover {
+            background: var(--yellow);
+            color: var(--black);
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+        }
+
+        .nav-btn:active {
+            transform: translate(4px, 4px);
+            box-shadow: none;
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 14px;
+            color: var(--black);
+            background: var(--white);
+            padding: 10px 15px;
+            border: 4px solid var(--black);
+        }
+
+        /* Contact links */
+        .contacts {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .contact-link {
+            display: inline-block;
+            margin: 10px 20px;
+            padding: 10px 20px;
+            background: var(--cyan);
+            color: var(--black);
+            text-decoration: none;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 10px;
+            border: 4px solid var(--black);
+            box-shadow: 4px 4px 0 var(--black);
+        }
+
+        .contact-link:hover {
+            background: var(--yellow);
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 var(--black);
+        }
+
+        /* Achievement badges */
+        .badges {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .badge {
+            text-align: center;
+            padding: 20px;
+            background: var(--white);
+            border: 4px solid var(--black);
+            box-shadow: 4px 4px 0 var(--black);
+        }
+
+        .badge-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .badge-name {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 8px;
+            color: var(--black);
+        }
+
+        /* Example block */
+        .example-block {
+            background: var(--white);
+            color: var(--black);
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 6px solid var(--cyan);
+        }
+
+        .example-block.right-border {
+            border-left-color: var(--pink);
+        }
+
+        .example-label {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 10px;
+            color: var(--black);
+            margin-bottom: 10px;
+        }
+
+        /* Scrollable content */
+        .scroll-content {
+            max-height: 70vh;
+            overflow-y: auto;
+            padding-right: 20px;
+        }
+
+        .scroll-content::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .scroll-content::-webkit-scrollbar-track {
+            background: var(--white);
+        }
+
+        .scroll-content::-webkit-scrollbar-thumb {
+            background: var(--black);
+            border: 2px solid var(--white);
+        }
+
+        /* Fruit icons */
+        .fruit-compare {
+            display: flex;
+            gap: 60px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .fruit {
+            text-align: center;
+            background: var(--white);
+            padding: 20px;
+            border: 4px solid var(--black);
+            box-shadow: 4px 4px 0 var(--black);
+        }
+
+        .fruit-icon {
+            font-size: 80px;
+            margin-bottom: 15px;
+        }
+
+        .fruit-desc {
+            font-size: 12px;
+            max-width: 200px;
+            color: var(--black);
+        }
+
+        /* Pixel decorations */
+        .pixel-decoration {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--black);
+        }
+
+        .pixel-decoration.top-left {
+            top: 20px;
+            left: 20px;
+        }
+
+        .pixel-decoration.top-right {
+            top: 20px;
+            right: 20px;
+        }
+
+        .pixel-decoration.bottom-left {
+            bottom: 80px;
+            left: 20px;
+        }
+
+        .pixel-decoration.bottom-right {
+            bottom: 80px;
+            right: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 18px; }
+            h2 { font-size: 12px; }
+            .slide { padding: 20px; }
+            .translate-container { flex-direction: column; }
+            table { font-size: 12px; }
+            th, td { padding: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-counter">
+        <span id="currentSlide">1</span> / <span id="totalSlides">15</span>
+    </div>
+
+    <!-- Slide 1: Title -->
+    <div class="slide active" id="slide1">
+        <h1>Межкультурные различия</h1>
+        <div class="vs-container">
+            <div class="character">
+                <div class="character-icon">🧢☕</div>
+                <div class="pixel-font" style="color: #4285f4;">Северная Америка</div>
+            </div>
+            <div class="vs-text">VS</div>
+            <div class="character">
+                <div class="character-icon">🪆😐</div>
+                <div class="pixel-font" style="color: #ea4335;">СНГ</div>
+            </div>
+        </div>
+        <h2>Communication Style | Giving Feedback | Trust</h2>
+    </div>
+
+    <!-- Slide 2: About Expert -->
+    <div class="slide" id="slide2">
+        <h2>👤 Об эксперте</h2>
+        <div class="pixel-border" style="max-width: 700px; text-align: center;">
+            <h1 style="font-size: 24px; margin-bottom: 30px;">Дарья Туча</h1>
+            
+            <div style="text-align: left; margin: 20px 0;">
+                <div class="stat-label">L&D SKILL</div>
+                <div class="stat-bar"><div class="stat-fill" style="width: 90%;"></div></div>
+                
+                <div class="stat-label">CROSS-CULTURAL</div>
+                <div class="stat-bar"><div class="stat-fill" style="width: 85%;"></div></div>
+                
+                <div class="stat-label">AI KNOWLEDGE</div>
+                <div class="stat-bar"><div class="stat-fill" style="width: 80%;"></div></div>
+            </div>
+
+            <ul style="list-style: none; text-align: left; margin: 20px 0;">
+                <li>🍁 L&D в канадской компании</li>
+                <li>🏢 ex-Expedia, ex-Lululemon, ex-Skyeng</li>
+                <li>👥 Co-founder LXD hero</li>
+                <li>📱 Автор канала Туча EdTech</li>
+            </ul>
+
+            <div class="contacts">
+                <a href="https://www.linkedin.com/in/daria-tucha" class="contact-link" target="_blank">LinkedIn</a>
+                <a href="https://t.me/edtechtucha" class="contact-link" target="_blank">Telegram</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Intro Meme -->
+    <div class="slide" id="slide3">
+        <div class="meme-container">
+            <h2>🎮 Level 1: Intro</h2>
+            <img src="slavic-face.jpg" alt="Slavic Face Meme" style="max-width: 400px; max-height: 300px; border: 4px solid #fff; box-shadow: 4px 4px 0 #000; margin: 20px 0;">
+            <p class="pixel-font" style="font-size: 14px; color: #ffd93d; margin: 20px 0;">
+                "Моё лицо, когда меня 15 раз за день<br>спросили, как же мои дела?"
+            </p>
+            
+            <div class="health-bar">
+                <div class="health-fill"></div>
+                <div class="health-label">PATIENCE: LOW</div>
+            </div>
+
+            <div class="pixel-border" style="margin-top: 30px; max-width: 600px;">
+                <p style="font-size: 14px; line-height: 1.8;">
+                    Недопонимание редко возникает из-за плохих намерений.<br>
+                    Оно возникает из-за <strong style="color: #ffd93d;">разных культурных ожиданий</strong><br>
+                    о ясности, уважении и доверии.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Communication Differences -->
+    <div class="slide" id="slide4">
+        <h2>📢 Communication Style</h2>
+        <h3>Low-context vs High-context</h3>
+        
+        <table>
+            <tr>
+                <th></th>
+                <th style="color: #4285f4;">🇺🇸 North America</th>
+                <th style="color: #ea4335;">🇷🇺 СНГ / Россия</th>
+            </tr>
+            <tr>
+                <td><strong>Контекст</strong></td>
+                <td>Low-context — всё проговаривается словами</td>
+                <td>Medium/High-context — нужно "читать между строк"</td>
+            </tr>
+            <tr>
+                <td><strong>Улыбка</strong></td>
+                <td>"Социальная смазка", норма вежливости 😊</td>
+                <td>Искреннее чувство, не для незнакомцев 😐</td>
+            </tr>
+            <tr>
+                <td><strong>Small talk</strong></td>
+                <td>Обязателен ("How are you?")</td>
+                <td>Странно и неуместно с незнакомыми</td>
+            </tr>
+        </table>
+
+        <div style="display: flex; gap: 40px; justify-content: center; margin-top: 30px;">
+            <div class="character">
+                <div style="font-size: 60px;">💬💬💬</div>
+                <div style="font-size: 12px;">blah blah blah</div>
+            </div>
+            <div class="character">
+                <div style="font-size: 60px;">🤔❓</div>
+                <div style="font-size: 12px;">...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Google Translate - Communication -->
+    <div class="slide" id="slide5">
+        <h2>🔄 Google Translate</h2>
+        <h3>North American English → Russian English</h3>
+
+        <div class="scroll-content">
+            <!-- Example 1 -->
+            <p class="pixel-font" style="font-size: 11px; color: #6bcb77; margin: 20px 0;">Пример 1: Lunch invitation</p>
+            <div class="translate-container">
+                <div class="translate-box left">
+                    <div class="translate-header">EN 🇺🇸</div>
+                    <p><strong>Q:</strong> "Do you want to grab some lunch?"</p>
+                    <p><strong>A:</strong> "No, thank you."</p>
+                    <p style="color: #666; margin-top: 10px;"><em>Meaning: I don't want to eat</em></p>
+                </div>
+                <div class="translate-arrow">→</div>
+                <div class="translate-box right">
+                    <div class="translate-header">RU 🇷🇺</div>
+                    <p><strong>Q:</strong> "Ты хочешь кушать?"</p>
+                    <p><strong>A:</strong> "Да нет."</p>
+                    <p style="color: #666; margin-top: 10px;"><em>Meaning: На самом деле, я хочу кушать</em></p>
+                </div>
+            </div>
+
+            <!-- Example 2 -->
+            <p class="pixel-font" style="font-size: 11px; color: #6bcb77; margin: 20px 0;">Пример 2: Meeting agenda</p>
+            <div class="translate-container">
+                <div class="translate-box left">
+                    <div class="translate-header">EN 🇺🇸</div>
+                    <p><strong>Subject:</strong> Q3 Planning Session</p>
+                    <p><strong>Agenda:</strong></p>
+                    <p>1. Review Q2 results (15 min)</p>
+                    <p>2. Discuss Q3 priorities (20 min)</p>
+                    <p>3. Assign action items (10 min)</p>
+                    <p>4. Q&A (5 min)</p>
+                    <p><strong>Pre-read:</strong> Q2 Report attached</p>
+                </div>
+                <div class="translate-arrow">→</div>
+                <div class="translate-box right">
+                    <div class="translate-header">RU 🇷🇺</div>
+                    <p><strong>Subject:</strong> Встреча</p>
+                    <p><strong>Agenda:</strong></p>
+                    <p>1. Обсудить дела</p>
+                </div>
+            </div>
+
+            <!-- Example 3 -->
+            <p class="pixel-font" style="font-size: 11px; color: #6bcb77; margin: 20px 0;">Пример 3: How are you?</p>
+            <div class="translate-container">
+                <div class="translate-box left">
+                    <div class="translate-header">EN 🇺🇸</div>
+                    <p>"How are you?"</p>
+                    <p style="color: #666; margin-top: 10px;"><em>Meaning: Hi! (не ждут ответа)</em></p>
+                </div>
+                <div class="translate-arrow">→</div>
+                <div class="translate-box right">
+                    <div class="translate-header">RU 🇷🇺</div>
+                    <p>"..." <em>(awkward silence)</em></p>
+                    <p style="color: #666; margin-top: 10px;"><em>Thinking: "Зачем он спрашивает? Мы же не друзья..."</em></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Quiz -->
+    <div class="slide" id="slide6">
+        <h2>❓ Вопрос аудитории</h2>
+        
+        <div class="pixel-border" style="max-width: 600px; text-align: center;">
+            <p class="pixel-font" style="font-size: 14px; margin-bottom: 30px; color: #ffd93d;">
+                Какая ситуация самая сложная для коммуникации?
+            </p>
+
+            <div class="quiz-option" onclick="this.classList.remove('correct')">
+                A) Low-context + Low-context
+            </div>
+            <div class="quiz-option" onclick="this.classList.toggle('correct')">
+                B) Low-context + High-context ✓
+            </div>
+            <div class="quiz-option" onclick="this.classList.remove('correct')">
+                C) High-context + High-context
+            </div>
+
+            <p style="margin-top: 30px; font-size: 14px; color: #6bcb77;">
+                💡 Ответ B — когда один человек всё проговаривает,<br>
+                а другой ищет скрытый смысл
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 7: Communication Tips -->
+    <div class="slide" id="slide7">
+        <h2>💡 И что делать?</h2>
+        
+        <ul class="tips-list">
+            <li>
+                <span class="tip-icon">💬</span>
+                <span>Если в команде есть high-context и low-context люди — используйте <strong style="color: #ffd93d;">low-context подход</strong>: проговаривайте всё явно</span>
+            </li>
+            <li>
+                <span class="tip-icon">😊</span>
+                <span>Не поверите, но улыбаться и вести small talk — это приходит со временем, <strong style="color: #ffd93d;">привычка вырабатывается</strong></span>
+            </li>
+            <li>
+                <span class="tip-icon">✅</span>
+                <span>Помните: американское "How are you?" = не вопрос, а приветствие<br>(можно просто ответить <strong style="color: #6bcb77;">"Good, thanks!"</strong>)</span>
+            </li>
+        </ul>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <div class="stat-label">COMMUNICATION SKILL</div>
+            <div class="stat-bar" style="width: 300px; margin: 0 auto;">
+                <div class="stat-fill" style="width: 100%;"></div>
+            </div>
+            <p class="pixel-font" style="font-size: 10px; color: #6bcb77; margin-top: 10px;">+1 LEVEL UP!</p>
+        </div>
+    </div>
+
+    <!-- Slide 8: Feedback Differences -->
+    <div class="slide" id="slide8">
+        <h2>📝 Giving Feedback</h2>
+        <h3>Indirect vs Direct Feedback</h3>
+        
+        <table>
+            <tr>
+                <th></th>
+                <th style="color: #4285f4;">🇺🇸 North America</th>
+                <th style="color: #ea4335;">🇷🇺 СНГ / Россия</th>
+            </tr>
+            <tr>
+                <td><strong>Структура</strong></td>
+                <td>То, что нужно сделать по-другому, закодировано в позитивный фидбэк 🥪</td>
+                <td>Фидбэк прямой, сразу к делу ⚡</td>
+            </tr>
+            <tr>
+                <td><strong>Язык</strong></td>
+                <td>Softeners: "maybe", "a bit", "kind of", "sort of"</td>
+                <td>"Это не работает", "Переделай"</td>
+            </tr>
+            <tr>
+                <td><strong>Публичная критика</strong></td>
+                <td>Табу, только 1-on-1 🤫</td>
+                <td>Нормально, при всех 📢</td>
+            </tr>
+            <tr>
+                <td><strong>Позитивный фидбэк</strong></td>
+                <td>Много и часто 🌟🌟🌟</td>
+                <td>Редко (если всё ок — зачем говорить?) 🤷</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Slide 9: Google Translate - Feedback -->
+    <div class="slide" id="slide9">
+        <h2>🔄 Google Translate — Feedback Edition</h2>
+
+        <div class="scroll-content">
+            <!-- Example 1 -->
+            <p class="pixel-font" style="font-size: 11px; color: #6bcb77; margin: 20px 0;">Пример 1: Критика работы</p>
+            <div class="translate-container">
+                <div class="translate-box left">
+                    <div class="translate-header">DIPLOMATIC 🇺🇸</div>
+                    <p>"John, I really appreciate all your work on this. I'm just a bit concerned it may not be ready for tomorrow."</p>
+                </div>
+                <div class="translate-arrow">→</div>
+                <div class="translate-box right">
+                    <div class="translate-header">DIRECT 🇷🇺</div>
+                    <p>"This isn't good enough. We can't present it tomorrow."</p>
+                </div>
+            </div>
+
+            <!-- Example 2 -->
+            <p class="pixel-font" style="font-size: 11px; color: #6bcb77; margin: 20px 0;">Пример 2: Отклонение идеи</p>
+            <div class="translate-container">
+                <div class="translate-box left">
+                    <div class="translate-header">DIPLOMATIC 🇺🇸</div>
+                    <p>"Well, it could have legs, but perhaps we should discuss it further next week."</p>
+                </div>
+                <div class="translate-arrow">→</div>
+                <div class="translate-box right">
+                    <div class="translate-header">DIRECT 🇷🇺</div>
+                    <p>"No, I don't like it. It's not right for this."</p>
+                </div>
+            </div>
+
+            <!-- Example 3 -->
+            <p class="pixel-font" style="font-size: 11px; color: #6bcb77; margin: 20px 0;">Пример 3: Время на встрече</p>
+            <div class="translate-container">
+                <div class="translate-box left">
+                    <div class="translate-header">DIPLOMATIC 🇺🇸</div>
+                    <p>"Sorry, I'm really conscious of time. Perhaps we should move on."</p>
+                </div>
+                <div class="translate-arrow">→</div>
+                <div class="translate-box right">
+                    <div class="translate-header">DIRECT 🇷🇺</div>
+                    <p>"This is taking too long. We need to move on."</p>
+                </div>
+            </div>
+
+            <div class="pixel-border" style="margin-top: 30px;">
+                <p class="pixel-font" style="font-size: 10px; color: #ffd93d;">Что слышит другая сторона:</p>
+                <p style="margin-top: 10px;">🇷🇺 Русский слышит американский фидбэк → "Значит всё ок!" → ничего не меняет</p>
+                <p>🇺🇸 Американец слышит русский фидбэк → "Меня атакуют!" → демотивация</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 10: Feedback Tips -->
+    <div class="slide" id="slide10">
+        <h2>💡 И что делать?</h2>
+        
+        <ul class="tips-list">
+            <li>
+                <span class="tip-icon">🤖</span>
+                <span>Работая с американцами — добавляйте softeners, просите <strong style="color: #ffd93d;">AI перевести на уважительный английский</strong></span>
+            </li>
+            <li>
+                <span class="tip-icon">💬</span>
+                <span>Объясните коллегам разницу в подходах, чтобы они поняли вас</span>
+            </li>
+            <li>
+                <span class="tip-icon">❓</span>
+                <span>Если сомневаетесь — спросите:<br><strong style="color: #6bcb77;">"I want to make sure I understood the feedback correctly. What exactly needs to be changed?"</strong></span>
+            </li>
+        </ul>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <div class="stat-label">FEEDBACK SKILL</div>
+            <div class="stat-bar" style="width: 300px; margin: 0 auto;">
+                <div class="stat-fill" style="width: 100%;"></div>
+            </div>
+            <p class="pixel-font" style="font-size: 10px; color: #6bcb77; margin-top: 10px;">UPGRADING...</p>
+        </div>
+    </div>
+
+    <!-- Slide 11: Trust Differences -->
+    <div class="slide" id="slide11">
+        <h2>🤝 Trust</h2>
+        <h3>Peach vs Coconut Culture</h3>
+
+        <div class="fruit-compare">
+            <div class="fruit">
+                <div class="fruit-icon">🍑</div>
+                <div class="pixel-font" style="font-size: 12px; color: #4285f4;">PEACH</div>
+                <p class="fruit-desc">Мягкая снаружи, косточка внутри</p>
+            </div>
+            <div class="fruit">
+                <div class="fruit-icon">🥥</div>
+                <div class="pixel-font" style="font-size: 12px; color: #ea4335;">COCONUT</div>
+                <p class="fruit-desc">Твёрдая скорлупа, мягкий внутри</p>
+            </div>
+        </div>
+        
+        <table style="margin-top: 20px;">
+            <tr>
+                <th></th>
+                <th style="color: #4285f4;">🍑 North America</th>
+                <th style="color: #ea4335;">🥥 СНГ / Россия</th>
+            </tr>
+            <tr>
+                <td><strong>Оболочка</strong></td>
+                <td>Мягкая снаружи — сразу дружелюбны</td>
+                <td>Твёрдая снаружи — сначала сдержанны</td>
+            </tr>
+            <tr>
+                <td><strong>Основа доверия</strong></td>
+                <td>Task-based: компетенция и результаты</td>
+                <td>Relationship-based: личные отношения и время</td>
+            </tr>
+            <tr>
+                <td><strong>Скорость</strong></td>
+                <td>"Let's get to work!"</td>
+                <td>"Let's get to know each other first"</td>
+            </tr>
+            <tr>
+                <td><strong>Рабочие связи</strong></td>
+                <td>Нормально строить связи, но не быть супер-друзьями</td>
+                <td>Если уж узнаёте друг друга — вы друллеги 👯</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Slide 12: Google Translate - Trust -->
+    <div class="slide" id="slide12">
+        <h2>🔄 Google Translate — Trust Edition</h2>
+
+        <div class="scroll-content">
+            <table>
+                <tr>
+                    <th style="color: #4285f4;">🇺🇸 North American English</th>
+                    <th style="color: #ea4335;">🇷🇺 Как слышит другая сторона</th>
+                </tr>
+                <tr>
+                    <td>"We should grab dinner sometime!"</td>
+                    <td>
+                        <em style="color: #666;">Вежливая фраза, не обязательство</em><br>
+                        🇷🇺 "Отлично! Когда идём?" → звонит на следующий день
+                    </td>
+                </tr>
+                <tr>
+                    <td>"Let's get straight to business"</td>
+                    <td>
+                        <em style="color: #666;">Профессионализм</em><br>
+                        🇷🇺 "Ему на меня наплевать, он холодный"
+                    </td>
+                </tr>
+                <tr>
+                    <td>"I'll send you the contract"</td>
+                    <td>
+                        <em style="color: #666;">Стандартная процедура</em><br>
+                        🇷🇺 "Он мне не доверяет"
+                    </td>
+                </tr>
+                <tr>
+                    <td>🇷🇺 Русский молчит и не улыбается</td>
+                    <td>
+                        <em style="color: #666;">Нормальное поведение с незнакомым</em><br>
+                        🇺🇸 "Он меня не любит / злится"
+                    </td>
+                </tr>
+            </table>
+
+            <div style="text-align: center; margin-top: 30px; font-size: 40px;">
+                ❌ Lost in translation
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 13: Trust Tips -->
+    <div class="slide" id="slide13">
+        <h2>💡 И что делать?</h2>
+        
+        <ul class="tips-list">
+            <li>
+                <span class="tip-icon">📝</span>
+                <span>В начале встречи во время small talk <strong style="color: #ffd93d;">запоминайте личные детали</strong>, чтобы потом задавать персональные вопросы и устанавливать связи</span>
+            </li>
+            <li>
+                <span class="tip-icon">💡</span>
+                <span>Помните: <strong style="color: #6bcb77;">американская дружелюбность ≠ дружба</strong>,<br><strong style="color: #ea4335;">русская сдержанность ≠ враждебность</strong></span>
+            </li>
+        </ul>
+
+        <div class="pixel-border" style="margin-top: 40px; text-align: center;">
+            <p style="font-size: 30px; margin: 20px 0;">😊 ≠ 💕</p>
+            <p style="font-size: 30px; margin: 20px 0;">😐 ≠ 😠</p>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <div class="stat-label">TRUST SKILL</div>
+            <div class="stat-bar" style="width: 300px; margin: 0 auto;">
+                <div class="stat-fill" style="width: 100%;"></div>
+            </div>
+            <p class="pixel-font" style="font-size: 10px; color: #6bcb77; margin-top: 10px;">PRO TIPS UNLOCKED!</p>
+        </div>
+    </div>
+
+    <!-- Slide 14: Conclusion -->
+    <div class="slide" id="slide14">
+        <h2>🏆 Game Complete!</h2>
+        
+        <table style="max-width: 700px;">
+            <tr>
+                <th>Элемент</th>
+                <th style="color: #4285f4;">Северная Америка</th>
+                <th style="color: #ea4335;">СНГ / Россия</th>
+            </tr>
+            <tr>
+                <td><strong>Коммуникация</strong></td>
+                <td>Explicit, low-context</td>
+                <td>Более implicit, context-aware</td>
+            </tr>
+            <tr>
+                <td><strong>Обратная связь</strong></td>
+                <td>Softened, sandwich</td>
+                <td>Прямая, без обёртки</td>
+            </tr>
+            <tr>
+                <td><strong>Доверие</strong></td>
+                <td>Task-based 🍑</td>
+                <td>Relationship-based 🥥</td>
+            </tr>
+        </table>
+
+        <div class="badges">
+            <div class="badge">
+                <div class="badge-icon">🐟</div>
+                <div class="badge-name">Fish Sees Water</div>
+            </div>
+            <div class="badge">
+                <div class="badge-icon">❓</div>
+                <div class="badge-name">Curious Mind</div>
+            </div>
+            <div class="badge">
+                <div class="badge-icon">🔄</div>
+                <div class="badge-name">Style Switcher</div>
+            </div>
+        </div>
+
+        <div class="pixel-border" style="text-align: center; max-width: 600px;">
+            <p class="pixel-font" style="font-size: 12px; color: #ffd93d;">"Laugh at your own culture"</p>
+            <p style="margin-top: 15px;">Говорите о своей культуре с юмором и спрашивайте других:</p>
+            <p style="color: #6bcb77; margin-top: 10px;"><em>"Помоги мне понять, как лучше работать с вами?"</em></p>
+        </div>
+    </div>
+
+    <!-- Slide 15: Final Meme -->
+    <div class="slide" id="slide15">
+        <h2>🎮 Thanks for playing!</h2>
+        
+        <p class="pixel-font" style="font-size: 12px; color: #ffd93d; text-align: center; margin-bottom: 30px;">
+            "Если вас вдруг спросят, почему у вас такое лицо —<br>просто покажите эту фотографию"
+        </p>
+
+        <div class="comparison-container">
+            <div class="location">
+                <div class="location-image">🏚️🌧️😐</div>
+                <div class="location-label">Где вырос ты</div>
+                <p style="font-size: 12px; margin-top: 10px;">Серые панельки,<br>пасмурное небо</p>
+            </div>
+            
+            <div style="font-size: 40px;">VS</div>
+            
+            <div class="location">
+                <div class="location-image">🏡☀️😊</div>
+                <div class="location-label">Где выросли они</div>
+                <p style="font-size: 12px; margin-top: 10px;">Солнце, газоны,<br>белые заборы</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; font-size: 80px;">
+            😐
+        </div>
+
+        <div class="contacts">
+            <a href="https://www.linkedin.com/in/daria-tucha" class="contact-link" target="_blank">LinkedIn</a>
+            <a href="https://t.me/edtechtucha" class="contact-link" target="_blank">Telegram</a>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav">
+        <button class="nav-btn" onclick="prevSlide()">◀ PREV</button>
+        <button class="nav-btn" onclick="nextSlide()">NEXT ▶</button>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 15;
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            
+            if (n > totalSlides) currentSlide = 1;
+            if (n < 1) currentSlide = totalSlides;
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            document.getElementById('slide' + currentSlide).classList.add('active');
+            document.getElementById('currentSlide').textContent = currentSlide;
+        }
+
+        function nextSlide() {
+            currentSlide++;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide--;
+            showSlide(currentSlide);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // Touch navigation for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX - touchEndX > 50) {
+                nextSlide();
+            } else if (touchEndX - touchStartX > 50) {
+                prevSlide();
+            }
+        });
+    </script>
+</body>
+</html>
